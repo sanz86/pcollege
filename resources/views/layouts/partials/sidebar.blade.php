@@ -33,10 +33,10 @@
         <ul class="sidebar-menu">
             <li class="header">Main Menu</li>
             <!-- Optionally, you can add icons to the links -->
-            <li {!! $pageDetails->title == 'dashboard'? 'class="active"' : '' !!}><a href="{{ route('dashboard') }}"><i class='fa fa-link'></i> <span>Dashboard</span></a></li>
-            <li {!! $pageDetails->title == 'news'? 'class="active"' : '' !!}><a href="{{ route('content',['content' => 'news']) }}"><i class='fa fa-link'></i> <span>News</span></a></li>
-            <li {!! $pageDetails->title == 'gallery'? 'class="active"' : '' !!}><a href="{{ route('content',['content' => 'gallery']) }}"><i class='fa fa-link'></i> <span>Gallery</span></a></li>
-            <li class="treeview {!! array_search($pageDetails->title,['', 'events', 'result', 'holiday_list', 'academic_calender', 'prospectus'], TRUE)? 'active' : '' !!}">
+            <li {!! isset($pageDetails)?($pageDetails->title == 'dashboard'? 'class="active"' : '') : '' !!}><a href="{{ route('dashboard') }}"><i class='fa fa-link'></i> <span>Dashboard</span></a></li>
+            <li {!! isset($pageDetails)?($pageDetails->title == 'news'? 'class="active"' : '') : '' !!}><a href="{{ route('content',['content' => 'news']) }}"><i class='fa fa-link'></i> <span>News</span></a></li>
+            <li {!! isset($pageDetails)?($pageDetails->title == 'gallery'? 'class="active"' : '') : '' !!}><a href="{{ route('content',['content' => 'gallery']) }}"><i class='fa fa-link'></i> <span>Gallery</span></a></li>
+            <li class="treeview {!! isset($pageDetails)?(array_search($pageDetails->title,['', 'events', 'result', 'holiday_list', 'academic_calender', 'prospectus'], TRUE)? 'active' : '') : '' !!}">
                 <a href="#"><i class='fa fa-link'></i> <span>Academics</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('content',['content' => 'events']) }}">Events</a></li>
@@ -49,7 +49,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>People</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('content',['content' => 'events']) }}">Department</a></li>
+                    <li><a href="{{ route('department') }}">Department</a></li>
                     <li><a href="{{ route('content',['content' => 'results']) }}">Course</a></li>
                     <li><a href="{{ route('content',['content' => 'holiday_list']) }}">Faculty</a></li>
                     <li><a href="{{ route('content',['content' => 'academic_calender']) }}">Student</a></li>

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStaffTable extends Migration
+class AddMimeInFileDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,8 @@ class CreateStaffTable extends Migration
      */
     public function up()
     {
-        Schema::create('staff', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::table('file_details', function (Blueprint $table) {
+            $table->string('mime');
         });
     }
 
@@ -25,6 +24,8 @@ class CreateStaffTable extends Migration
      */
     public function down()
     {
-        Schema::drop('staff');
+        Schema::table('file_details', function (Blueprint $table) {
+            $table->dropColumn('mime');
+        });
     }
 }

@@ -12,12 +12,17 @@
 
 @include('layouts.partials.modal')
 
+
 						  <!-- TO DO List -->
           <div class="box box-primary">
             <div class="box-header">
               <i class="ion ion-clipboard"></i>
 
               <h3 class="box-title">contents</h3>
+              
+             
+                {{ $app->client['description'] }}
+              
 
               <div class="box-tools pull-right">
                 <div class="pagination pagination-sm inline">
@@ -49,6 +54,7 @@
                   <!-- Emphasis label -->
                   <small class="label label-danger"><i class="fa fa-clock-o"></i>{{ $contents[$i]->created_at }}</small>
                   <!-- General tools such as edit or delete-->
+                  <a href="{{ route('getFile',['image' => $contents[$i]->url]) }}" target="_blank">Down</a>
                   <div class="tools">
                    <a href="{{ route('content_edit',['content' => $pageDetails->title ,'id' => $contents[$i]->id]) }}"> <i class="fa fa-edit"></i></a>
                    <a href="{{ route('content_delete',['content' => $pageDetails->title ,'id' => $contents[$i]->id]) }}"> <i class="fa fa-trash-o"></i></a>
@@ -58,6 +64,7 @@
                 @endfor
                
               </ul>
+              
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
@@ -68,3 +75,4 @@
 
 
 @endsection
+

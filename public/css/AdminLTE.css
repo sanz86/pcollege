@@ -4904,3 +4904,26 @@ table.text-center th {
     white-space: normal !important;
   }
 }
+
+
+.drop{
+	border:2px dotted #bdc3c7;
+	padding:20px;
+	margin-bottom:20px;
+	width:100%;
+	height:100px;
+	color: #bdc3c7;
+	font-size:200%;
+}
+
+
+#modalFile {
+    display:block;
+    height:0;
+    width:0;
+}
+
+#reset
+{
+    cursor: pointer;
+}

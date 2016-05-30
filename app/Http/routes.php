@@ -23,26 +23,62 @@ Route::group(['middleware' => 'web'], function(){
         'as' => '404error'
         ]);
         
-      Route::get('/{content}',[
+      Route::get('/content/{content}',[
         'uses' => 'ContentController@getContent',
         'as' => 'content'
         ]);
         
-    Route::post('/{content}/create',[
+    Route::post('/content/{content}/create',[
         'uses' => 'ContentController@postContent',
         'as' => 'content_create'
         ]);
         
-     Route::get('/{content}/edit/{id}',[
+    Route::post('/content/{content}/update/',[
         'uses' => 'ContentController@editContent',
+        'as' => 'content_update'
+        ]);
+        
+    Route::get('/content/{content}/edit/{id}',[
+        'uses' => 'ContentController@getEditContent',
         'as' => 'content_edit'
         ]);
         
-     Route::get('/{content}/{id}/delete',[
+     Route::get('/content/{content}/{id}/delete',[
         'uses' => 'ContentController@deleteContent',
         'as' => 'content_delete'
         ]);
+        
+    Route::get('/department',function(){
+        $pageDetails = json_decode(json_encode(['title' => 'department']), FALSE);
+        return view('people.department',['pageDetails' => $pageDetails]);
+    })->name('department');
     
     // End of News
     
+
+    
+    Route::get('fileupload',function(){
+       
+      return view('fileupload');  
+    })->name('fileupload');
+    
+    Route::get('files/image/{image?}',[
+        'uses' => 'FileController@getFile',
+        'as' => 'getImage'
+        ]);
+        
+    Route::get('files/getfile/{image?}',[
+        'uses' => 'FileController@getFile',
+        'as' => 'getFile'
+        ]);
+        
+    Route::post('fileupload/post',[
+        'uses' => 'FileController@postFile',
+        'as' => 'upload_file'
+        ]);
+        
+        Route::get('file_content',function(){
+            echo  file_get_contents("http://pcollege-sanz86.c9users.io/content/news");
+            die();
+        });
 });

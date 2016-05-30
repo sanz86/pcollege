@@ -14,15 +14,16 @@ class CreateContentsTable extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('client_id');
             $table->string('title');
-            $table->text('message');
-            $table->string('url');
-            $table->string('content_type');
-            $table->string('additional_1');
-            $table->string('additional_2');
-            $table->string('additional_3');
-            $table->string('additional_4');
-            $table->string('additional_5');
+            $table->text('message')->nullable();
+            $table->string('url')->nullable();
+            $table->string('content_type')->nullable();
+            $table->string('additional_1')->nullable();
+            $table->string('additional_2')->nullable();
+            $table->string('additional_3')->nullable();
+            $table->string('additional_4')->nullable();
+            $table->string('additional_5')->nullable();
             $table->timestamps();
         });
     }

@@ -35,6 +35,12 @@ require __DIR__.'/../bootstrap/autoload.php';
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+/* Setup Client Information 
+*/
+
+$app->instance('clientId','barama');
+
+
 /*
 |--------------------------------------------------------------------------
 | Run The Application

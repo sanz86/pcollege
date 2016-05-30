@@ -14,7 +14,12 @@ class CreateCollegeDepartmentsTable extends Migration
     {
         Schema::create('college_departments', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('client_id');
+            $table->string('department_name');
+            $table->string('stream')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->unique(array('client_id', 'department_name'));
         });
     }
 
