@@ -40,14 +40,41 @@ desired effect
     <div class="content-wrapper">
         
         @yield('infobox')
+        
+         @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        
+         @if (Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+        @endif
+        
+        @if (Session::has('fail'))
+        <div class="alert alert-danger">
+            {{ Session::get('fail') }}
+        </div>
+        @endif
+              
 
         @include('layouts.partials.contentheader')
 
         <!-- Main content -->
         <section class="content">
+         
             
             <!-- Your Page Content Here -->
             @yield('main-content')
+        @include('layouts.partials.change_password_modal')    
+            
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 

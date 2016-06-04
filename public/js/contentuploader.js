@@ -1,12 +1,28 @@
 (function($) {
 	
-	$('.progress').hide();
-	$('#successinfo').hide();
+	// Initiate the Modals
+	function initModal()
+    {
+		$("#title").val('');
+        $("#message").text('');
+        $("#file").val('');
+        $("#id").val('');
+	}
 	
-	$('#reset').click(function() {
-		$('#successinfo').hide();
+	// Initiate the Uploads
+	function initFileUpload()
+    {
+        $(".progress").hide();
+     	$('#successinfo').hide();
 		$('.drop').show();
 		$("#file").val('');
+	}
+	
+	initModal();
+	initFileUpload();
+	
+	$('#reset').click(function() {
+		initFileUpload();
 	});
 	
 //select the drop container
@@ -125,5 +141,78 @@
 			  }
 		});
 	}
-
+	
+	var edit = $('.ec');
+	
+	edit.on('click',function(e){
+			e.preventDefault();
+              
+              $("#contentForm").attr('action',edit_url);
+              $("#actionTitle").text('Edit ');
+              
+              var obj = JSON.parse($(this).attr('data-value'));
+              
+              console.log(obj);
+              
+				$("#id").val(obj.id);
+              $('input[name="title"]').val(obj.title);
+              $("#message").text(obj.message);
+              
+              
+              console.log('dd '+obj.url);
+              if(obj.url != '')
+              {
+              	
+              	$("#spansuccess").text(obj.url);
+				$('.progress').hide();
+				$('.drop').hide();
+				$('#successinfo').show();
+				$("#file").val(obj.url);
+              }
+              
+              $("#addModal").modal('show');
+     });
+     
+    $("#addbutton").on('click',function(e){
+			e.preventDefault();
+              
+              initModal();
+			initFileUpload();
+              $("#contentForm").attr('action',add_url);
+              $("#actionTitle").text('Add ');
+              
+              $("#addModal").modal('show');
+     });
+     
+     
+     $("#userImage").on('click',function(e) {
+         alert('Nice');
+     })
+     
+      $(".gallery").colorbox();
+      
+    $("#addStaffButton").on('click',function(e){
+			e.preventDefault();
+              
+              initModal();
+			initFileUpload();
+              $("#contentStaffForm").attr('action',addStaff_url);
+              $("#actionTitle").text('Add ');
+              console.log('Hello');
+              
+              $("#addStaffModal").modal('show');
+     });
+     
+     $('#changePasswordBtn').on('click',function(e){
+     	
+     	var pass1 = $('#new_password').val();
+     	var pass2 = $('#re_new_password').val();
+     	if(pass1 != pass2)
+     	{
+     		alert('Password not matching');
+     		e.preventDefault();
+     	}
+     	
+     });
+     
 })(jQuery);

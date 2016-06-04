@@ -8,7 +8,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+            <a href="{{ url('/home') }}"><b>{{ $app->client['description'] }}</b> Admin</a>
         </div><!-- /.login-logo -->
 
     @if (count($errors) > 0)
@@ -47,6 +47,8 @@
             </div><!-- /.col -->
         </div>
     </form>
+
+<a href="{{ url('/password/reset') }}">I forgot my password</a><br>
 
 </div><!-- /.login-box-body -->
 

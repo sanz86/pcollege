@@ -10,11 +10,13 @@ class Client {
         $clients = ['barama' => ['client_id' => 'barama',
                             'description' => 'Barama College',
                             'tag_line' => 'nice',
-                            'short' => 'BC'],
+                            'short' => 'BC',
+                            'email' => 'admin@baramacollege.ac.in'],
                     'pansoi' => ['client_id' => 'pansoi',
                             'description' => 'Pansoi College',
                             'tag_line' => 'Very nice',
-                            'short' => 'PC'],
+                            'short' => 'PC',
+                            'email' => 'admin@pnasoicollege.ac.in'],
                     ];
                 
         return $clients[$client];

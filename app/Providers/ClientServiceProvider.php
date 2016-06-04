@@ -35,6 +35,6 @@ class ClientServiceProvider extends ServiceProvider
     
     protected function getClient()
     {
-        $this->client = Client::getClient($this->app->clientId);
+        $this->client = Client::getClient('barama');
     }
 }

@@ -11,19 +11,31 @@
 |
 */
 
-Route::group(['middleware' => 'web'], function(){
+Route::group(['middleware' => ['web','auth']], function(){
+    
+    
+    Route::post('password-reset',[
+        'uses' => 'HomeController@resetPassword',
+        'as' => 'change_password'
+        ]);
+    
+    // Home controller
     
     Route::get('/',[
-        'uses' => 'HomeController@getIndex',
+        'uses' => 'HomeController@index',
         'as' => 'dashboard'
         ]);
         
-    Route::get('/you_got_an_error',[
+    Route::get('/you-got-an-error',[
         'uses' => 'HomeController@getError',
         'as' => '404error'
         ]);
         
-      Route::get('/content/{content}',[
+    // End of Home Controller
+    
+    // Content Controller
+        
+    Route::get('/content/{content}',[
         'uses' => 'ContentController@getContent',
         'as' => 'content'
         ]);
@@ -38,29 +50,20 @@ Route::group(['middleware' => 'web'], function(){
         'as' => 'content_update'
         ]);
         
-    Route::get('/content/{content}/edit/{id}',[
-        'uses' => 'ContentController@getEditContent',
+    Route::post('/content/{content}/edit/',[
+        'uses' => 'ContentController@postEditContent',
         'as' => 'content_edit'
         ]);
         
-     Route::get('/content/{content}/{id}/delete',[
+    Route::get('/content/{content}/{id}/delete',[
         'uses' => 'ContentController@deleteContent',
         'as' => 'content_delete'
         ]);
         
-    Route::get('/department',function(){
-        $pageDetails = json_decode(json_encode(['title' => 'department']), FALSE);
-        return view('people.department',['pageDetails' => $pageDetails]);
-    })->name('department');
-    
-    // End of News
-    
+    // End of Content Controller
+        
 
-    
-    Route::get('fileupload',function(){
-       
-      return view('fileupload');  
-    })->name('fileupload');
+    // Other Utility Routes
     
     Route::get('files/image/{image?}',[
         'uses' => 'FileController@getFile',
@@ -77,8 +80,86 @@ Route::group(['middleware' => 'web'], function(){
         'as' => 'upload_file'
         ]);
         
-        Route::get('file_content',function(){
-            echo  file_get_contents("http://pcollege-sanz86.c9users.io/content/news");
-            die();
-        });
+    // End of Other Utility Routes
+    
+    // College Routes
+    
+    Route::group(['prefix' => 'college','as' => 'college::'],function(){
+        
+        Route::get('/department',[
+            'uses' => 'CollegeController@getDepartment',
+            'as' => 'getDepartment'
+            ]);
+        
+        Route::post('/department',[
+            'uses' => 'CollegeController@postDepartment',
+            'as' => 'postDepartment'
+            ]);
+            
+        Route::get('/department/{id}/delete',[
+            'uses' => 'CollegeController@deleteDepartment',
+            'as' => 'deleteDepartment'
+            ]);
+        
+        Route::get('/course',[
+            'uses' => 'CollegeController@getCourse',
+            'as' => 'getCourse'
+            ]);
+        
+        Route::post('/course',[
+            'uses' => 'CollegeController@postCourse',
+            'as' => 'postCourse'
+            ]);
+            
+        Route::post('/course/{id}/delete',[
+            'uses' => 'CollegeController@deleteCourse',
+            'as' => 'deleteCourse'
+            ]);
+            
+        Route::get('/course-details',[
+            'uses' => 'CollegeController@getCourseDetails',
+            'as' => 'getCourseDetails'
+            ]);
+            
+        Route::post('/course-details',[
+            'uses' => 'CollegeController@postCourseDetails',
+            'as' => 'postCourseDetails'
+            ]);
+        Route::get('/course-details/{id}/delete',[
+            'uses' => 'CollegeController@deleteCourseDetails',
+            'as' => 'deleteCourseDetails'
+            ]);
+            
+        // --------------------
+         
+        // Student Routes 
+            
+        Route::get('/student',[
+            'uses' => 'CollegeController@getStudent',
+            'as' => 'getStudent'
+            ]);
+            
+        Route::post('/student',[
+            'uses' => 'CollegeController@addStudent',
+            'as' => 'addStudent'
+            ]);
+            
+        Route::get('/staff',[
+            'uses' => 'CollegeController@getStaff',
+            'as' => 'getStaff'
+            ]);
+            
+        Route::post('/staff',[
+            'uses' => 'CollegeController@addStaff',
+            'as' => 'addStaff'
+            ]);
+    });
+    // End of College
+    
+    //
+    
+    // Testing
+    Route::get('/hello',function(){
+        return response()->json(['name'=>'sanjib']);
+    });
 });

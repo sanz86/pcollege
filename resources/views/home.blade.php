@@ -13,7 +13,7 @@
 					<div class="panel-heading">Home</div>
 
 					<div class="panel-body">
-						You are logged in!
+						Welcome to {{ app('client')['description'] }} Admin Panel.
 					</div>
 				</div>
 			</div>

@@ -38,7 +38,7 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 /* Setup Client Information 
 */
 
-$app->instance('clientId','barama');
+// $app->clientId = 'barama';
 
 
 /*
