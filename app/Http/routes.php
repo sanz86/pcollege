@@ -75,9 +75,19 @@ Route::group(['middleware' => ['web','auth']], function(){
         'as' => 'getFile'
         ]);
         
+    Route::get('files/thumb/{image?}',[
+        'uses' => 'FileController@getThumb',
+        'as' => 'getThumb'
+        ]);
+        
     Route::post('fileupload/post',[
         'uses' => 'FileController@postFile',
         'as' => 'upload_file'
+        ]);
+        
+    Route::post('avatar/{image}',[
+        'uses' => 'FileController@getAvatar',
+        'as' => 'avatar'
         ]);
         
     // End of Other Utility Routes
@@ -94,6 +104,11 @@ Route::group(['middleware' => ['web','auth']], function(){
         Route::post('/department',[
             'uses' => 'CollegeController@postDepartment',
             'as' => 'postDepartment'
+            ]);
+            
+        Route::post('/department-edit',[
+            'uses' => 'CollegeController@editDepartment',
+            'as' => 'editDepartment'
             ]);
             
         Route::get('/department/{id}/delete',[
@@ -143,7 +158,8 @@ Route::group(['middleware' => ['web','auth']], function(){
             'uses' => 'CollegeController@addStudent',
             'as' => 'addStudent'
             ]);
-            
+        
+        // Staff Route    
         Route::get('/staff',[
             'uses' => 'CollegeController@getStaff',
             'as' => 'getStaff'
@@ -153,6 +169,16 @@ Route::group(['middleware' => ['web','auth']], function(){
             'uses' => 'CollegeController@addStaff',
             'as' => 'addStaff'
             ]);
+            
+        Route::post('/staff-edit',[
+            'uses' => 'CollegeController@editStaff',
+            'as' => 'editStaff'
+            ]);
+            
+        Route::get('/staff/{id}/delete',[
+            'uses' => 'CollegeController@deleteStaff',
+            'as' => 'deleteStaff'
+            ]);
     });
     // End of College
     
@@ -160,6 +186,16 @@ Route::group(['middleware' => ['web','auth']], function(){
     
     // Testing
     Route::get('/hello',function(){
-        return response()->json(['name'=>'sanjib']);
+        return view('restapi');
     });
+    
+    // Testing
+    Route::get('/fileupload',function(){
+        return view('fileupload');
+    });
+    
+    Route::post('/fileupload',[
+        'uses' => 'TestController@postFile',
+        'as' => 'uploadf'
+        ]);
 });

@@ -9,7 +9,10 @@
 <!-- AdminLTE App -->
 <script src="{{ URL('/js/app.min.js') }}" type="text/javascript"></script>
 
-<script src="{{ URL('/js/contentuploader.js') }}" type="text/javascript"></script>
+<script src="{{ URL('/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL('/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+
+<script src="{{ URL('/js/pcollege.js') }}" type="text/javascript"></script>
 
 
 

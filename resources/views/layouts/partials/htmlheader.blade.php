@@ -27,4 +27,7 @@
     <![endif]-->
 
     <link href="{{ URL('/plugins/colorbox/colorbox.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ URL('/plugins/datatables/dataTables.bootstrap.css') }}">
+    
+    <link href="{{ URL('/css/pcollege.css') }}" rel="stylesheet" type="text/css" />
 </head>

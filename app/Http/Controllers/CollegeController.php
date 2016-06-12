@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use App\CollegeDepartment;
 use App\CollegeCourse;
+use App\Staff;
 use App\Classes\Page;
 
 class CollegeController extends Controller
@@ -29,12 +30,37 @@ class CollegeController extends Controller
     {
         $newDepartment = new CollegeDepartment();
         $newDepartment->client_id = app('client')['client_id'];
-        $newDepartment->department_name = $request['departmentName'];
-        $newDepartment->stream = $request['departmentStream'];
+        $newDepartment->department_name = $request['depName'];
+        $newDepartment->description = $request['depDescription'];
+        $newDepartment->stream = $request['depStream'];
         
-        $newDepartment->save();
+        $result = $newDepartment->save();
         
-        return redirect()->route('college::getDepartment');
+        if($result)
+            return redirect()->route('college::getDepartment')->with(['success' => 'Department added successfully!!']);
+        
+         return redirect()->route('college::getDepartment')->with(['fail' => 'Some thing Wrong happened!! Unable to add Department.']);
+    }
+    
+    public function editDepartment(Request $request)
+    {
+        
+        $newDepartment = CollegeDepartment::where('id',$request['depId'])->first();
+        
+        if($newDepartment)
+        {
+            $newDepartment->client_id = app('client')['client_id'];
+            $newDepartment->department_name = $request['depName'];
+            $newDepartment->description = $request['depDescription'];
+            $newDepartment->stream = $request['depStream'];
+            
+            $result = $newDepartment->save();
+            
+            if($result)
+            return redirect()->route('college::getDepartment')->with(['success' => 'Department updated successfully!!']);
+        }
+        
+        return redirect()->route('college::getDepartment')->with(['fail' => 'Some thing Wrong happened!! Unable to edit Department.']);
     }
     
     public function deleteDepartment($id)
@@ -125,13 +151,65 @@ class CollegeController extends Controller
         return view('college.student',['pageDetails' => $pageDetails]);
     }
     
+    // Staff Controllers
     
     public function getStaff()
     {
         $pageDetails = new \stdClass();
         $pageDetails->title = 'staff';
-        $pageDetails->description = 'Staff Entry';
+        $pageDetails->description = 'Staff';
         
-        return view('college.staff',['pageDetails' => $pageDetails]);
+        $departments = CollegeDepartment::all();
+        $staff = Staff::all();
+        
+        return view('college.staff',['pageDetails' => $pageDetails,'staff'=> $staff, 'departments' => $departments]);
+    }
+    
+    public function addStaff(Request $request)
+    {
+        
+        $newStaff = new Staff();
+        $newStaff->client_id = app('client')['client_id'];
+        $newStaff->name = $request['name'];
+        $newStaff->designation = $request['designation'];
+        $newStaff->qualification = $request['qualification'];
+        $newStaff->email = $request['email'];
+        $newStaff->bio_url = $request['bio'];
+        $newStaff->image_url = $request['image'];
+        $newStaff->staff_type = $request['staffCategory'];
+        
+        $result = $newStaff->save();
+        if($result)
+            return redirect()->route('college::getStaff')->with(['success' => 'Staff Added successfully!!']);
+            
+        return redirect()->route('college::getStaff')->with(['fail' => 'Some thing Wrong happened!! Unable to add new Staff!']);
+    }
+    
+    public function editStaff(Request $request)
+    {
+        $newStaff = Staff::find($request['id']);
+        $newStaff->name = $request['name'];
+        $newStaff->designation = $request['designation'];
+        $newStaff->qualification = $request['qualification'];
+        $newStaff->email = $request['email'];
+        $newStaff->bio_url = $request['bio'];
+        $newStaff->image_url = $request['image'];
+        $newStaff->staff_type = $request['staffCategory'];
+        
+        $result = $newStaff->save();
+        if($result)
+            return redirect()->route('college::getStaff')->with(['success' => 'Staff Edited successfully!!']);
+            
+        return redirect()->route('college::getStaff')->with(['fail' => 'Some thing Wrong happened!! Unable to edit Staff!']);
+    }
+    
+    public function deleteStaff(Request $request, $id)
+    {
+        $newStaff = Staff::find($id);
+        $result = $newStaff->delete();
+        if($result)
+            return redirect()->route('college::getStaff')->with(['success' => 'Staff Deleted successfully!!']);
+            
+        return redirect()->route('college::getStaff')->with(['fail' => 'Some thing Wrong happened!! Unable to Delete Staff!']);
     }
 }

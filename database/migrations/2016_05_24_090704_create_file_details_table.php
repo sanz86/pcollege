@@ -18,6 +18,7 @@ class CreateFileDetailsTable extends Migration
             $table->string('description')->nullable();
             $table->string('folder')->nullable();
             $table->string('file')->unique();
+            $table->string('mime');
             $table->string('file_type')->nullable();
             $table->timestamps();
         });

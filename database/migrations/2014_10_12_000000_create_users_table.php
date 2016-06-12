@@ -16,11 +16,13 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('client_id');
             $table->string('name')->nullable();
+            $table->string('email');
             $table->string('username');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->unique(array('client_id', 'username'));
+            $table->unique(['client_id', 'username']);
+            $table->unique(['client_id', 'email']);
         });
     }
 

@@ -35,37 +35,51 @@ desired effect
     @include('layouts.partials.mainheader')
 
     @include('layouts.partials.sidebar')
+    
+    
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         
         @yield('infobox')
         
+        <div class="box-body">
          @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
-            </ul>
-        </div>
+              </div>
+        
         @endif
         
          @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
+         
+             <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-check"></i> Alert!</h4>
+                {{ Session::get('success') }}
+             </div>
+             
         @endif
         
         @if (Session::has('fail'))
-        <div class="alert alert-danger">
-            {{ Session::get('fail') }}
-        </div>
+        
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                <div class="alert alert-danger">
+                    {{ Session::get('fail') }}
+                </div>
+              </div>
+        
         @endif
-              
+         
+         </div>     
 
-        @include('layouts.partials.contentheader')
+    @include('layouts.partials.contentheader')
 
         <!-- Main content -->
         <section class="content">
@@ -87,6 +101,7 @@ desired effect
 @section('scripts')
     @include('layouts.partials.scripts')
 @show
+
 
 </body>
 </html>

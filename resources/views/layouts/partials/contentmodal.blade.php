@@ -20,16 +20,23 @@
          
           </div>
           
-            <div class="drop">Click to select file or Drop file here</div>	
-            <div class="progress">
+            <div id="contentDrop">
+              <div class="drop">Click to select file or Drop file here</div>	
+            </div>
+          
+            <div id="contentProgress">
+              <div class="progress">
                 <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
                   <span class="sr-only">40% Complete (success)</span>
                 </div>
               </div>
+              <span class="progresssize"></span>
+            </div>
+            
             <div id="successinfo" class="alert alert-info">
-                File Uploaded: <span id="spansuccess"></span>
-                <span id="reset" class="label label-danger">Reset</span>
-              </div>
+                <span id="spansuccess"></span><br>
+                <span id="contentReset" class="label label-danger">Reset</span>
+            </div>
           </div>
         <!-- /.box-body -->
        <input type="hidden" name="_token" value="{{ Session::token() }}"/>
@@ -55,6 +62,8 @@
 
     var upload_url = "{{ route('upload_file') }}";
     var token = '{{ Session::token() }}';
+    
+    var drop_type = 'content';
     
     var add_url = "{{ route('content_create',['content' => $pageDetails->title]) }}";
     var edit_url = "{{ route('content_edit',['content' => $pageDetails->title]) }}";

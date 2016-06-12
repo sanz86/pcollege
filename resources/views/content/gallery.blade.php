@@ -39,7 +39,7 @@
                   <!-- small box -->
                     <div class="small-box gallery-image">
                     <a class="gallery" href="{{ route('getFile',['image' => $contents[$i]->url]) }}">
-                        <img class="img-thumbnail" src="{{ route('getFile',['image' => $contents[$i]->url]) }}" title="{{ $contents[$i]->title }}"></img>
+                        <img class="img-thumbnail" src="{{ route('getThumb',['image' => $contents[$i]->url]) }}" title="{{ $contents[$i]->title }}"></img>
                      </a> 
                       <div class="small-box-footer">
                         <a class="ec" href="" data-value="{{ json_encode($contents[$i]) }}"><i class="fa fa-edit"></i></a>

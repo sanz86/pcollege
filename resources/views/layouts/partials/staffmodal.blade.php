@@ -5,49 +5,100 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title"><span id="actionTitle"></span>Add Staff</h4>
+          <h4 class="modal-title"><span id="actionTitle"></span> Staff</h4>
         </div>
+        
         <div class="modal-body">
-        <form role="form" id="contentStaffForm" method="post" >
-         <div class="box-body">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="title" name="name" placeholder="Enter Name" required>
-          </div>
           
-          <div class="form-group">
-            <label for="designation">Designation</label>
-            <input type="text" class="form-control" id="title" name="designation" placeholder="Enter Desgination" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="aboutme">About Me</label>
-            <textarea class="form-control" rows="3" id="aboutme" name="aboutme" placeholder="Enter Text Here"></textarea>
-          </div>
-          
-            <div class="drop">Drop Image here</div>	
-            <div class="progress">
-                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-                  <span class="sr-only">40% Complete (success)</span>
+      <div class="row">    
+      <form role="form" id="staffForm" method="post" >
+        <div class="col-md-6">
+            <div class="box-body box-profile">
+              
+              <div id="staffShowImages" class="centered">
+                <img id="image" class="profile-user-img img-square" alt="User profile picture">
+  
+                <p><span id="editStaffImage" class="btn btn-block btn-primary btn-flat"><i class="fa fa-edit"></i>Edit</span></p>
+              </div>
+              <input id="staffImageFile" type="file" />
+              <input id="staffImage" name="image" type="hidden" />
+              <div id="staffProgress">
+                <div class="progress">
+                      <div id="staffProgressBar" class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                        <span class="sr-only">40% Complete (success)</span>
+                      </div>
+                      
                 </div>
+                <span id="staffProgresssize"></span>
               </div>
-            <div id="successinfo" class="alert alert-info successinfo">
-                File Uploaded: <span id="spansuccess"></span>
-                <span id="reset" class="label label-danger">Reset</span>
+              <!-- /.box-body -->
+            
+                <div class="form-group">
+                  <label for="name">Biodata:</label><br>
+                  <span id="bio">No Bio Data</span>
+                </div>
+              <p><span id="editStaffBio" class="btn btn-block btn-primary btn-flat"><i class="fa fa-edit"></i> Upload</span></p>
+                 <input id="staffBioFile" type="file" />
+                <input id="staffBio" name="bio" type="hidden" />
+               <div id="staffProgressBio"> 
+                <div class="progress">
+                    <div  id="staffProgressBarBio" class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                      <span class="sr-only">40% Complete (success)</span>
+                    </div>
+                </div>
+                
+                <span id="staffProgresssizeBio"></span>
+                </div>
+                
               </div>
+  
           </div>
-        <!-- /.box-body -->
-       <input type="hidden" name="_token" value="{{ Session::token() }}"/>
-       <input id="file" type="hidden" name="file"/>
-       <input id="id" type="hidden" name="id"/>
-       <input id="modalFile" type="file" />
-      
-      </form>
-        </div>
-         <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" form="contentForm">Save changes</button>
           
+          <div class="col-md-6">
+  
+          <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="staffname" name="name" placeholder="Enter Name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="designation">Designation</label>
+              <input type="text" class="form-control" id="staffdesignation" name="designation" placeholder="Enter Desgination" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="qualification">Qualification</label>
+              <input type="text" class="form-control" id="staffqualification" name="qualification" placeholder="Enter Qualification"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="staffemail" name="email" placeholder="Enter Email Id"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="staffCategory">Staff Category</label>
+              <select class="form-control select2" style="width: 100%;" name="staffCategory"  id="staffCategory" >
+                  <option value="Faculty">Faculty</option>
+                  <option value="Non Teaching">Non Teaching</option>
+                </select>
+              
+            </div>
+           
+        
+          
+          </div>
+          
+            <input type="hidden" name="_token" value="{{ Session::token() }}"/>
+           <input id="id" type="hidden" name="id"/>
+          
+          </form>
+          </div>
+        </div>
+         
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" form="staffForm">Save changes</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -61,8 +112,9 @@
     var upload_url = "{{ route('upload_file') }}";
     var token = '{{ Session::token() }}';
     
-    var addStaff_url = "{{ route('college::addStaff') }}";
-    var edit_url = "{{ route('content_edit',['content' => $pageDetails->title]) }}";
+    var add_Staff_url = "{{ route('college::addStaff') }}";
+    var edit_Staff_url = "{{ route('college::editStaff') }}";
+    var image_url = "{{ route('getFile',['image'=>'']) }}"
   
   </script>
   

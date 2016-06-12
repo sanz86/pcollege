@@ -8,7 +8,7 @@
         @if (! Auth::guest())
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{asset('/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
+                    <img src="{{ route('avatar',['image' => Auth::user()->avatar]) }}" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
                     <p>{{ Auth::user()->name }}</p>
@@ -51,9 +51,9 @@
                 <a href="#"><i class='fa fa-institution'></i> <span>Institute</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li {!! isset($pageDetails)?($pageDetails->title == 'department'? 'class="active"' : '') : '' !!}><a href="{{ route('college::getDepartment') }}"><i {!! isset($pageDetails)?($pageDetails->title == 'department'? 'class="fa fa-check-square-o"' : 'class="fa fa-square-o"') : 'class="fa fa-square-o"' !!}></i>Department</a></li>
-                    <li {!! isset($pageDetails)?($pageDetails->title == 'course'? 'class="active"' : '') : '' !!}><a href="{{ route('college::getCourse') }}"><i {!! isset($pageDetails)?($pageDetails->title == 'course'? 'class="fa fa-check-square-o"' : 'class="fa fa-square-o"') : 'class="fa fa-square-o"' !!}></i>Course</a></li>
+                  <!--  <li {!! isset($pageDetails)?($pageDetails->title == 'course'? 'class="active"' : '') : '' !!}><a href="{{ route('college::getCourse') }}"><i {!! isset($pageDetails)?($pageDetails->title == 'course'? 'class="fa fa-check-square-o"' : 'class="fa fa-square-o"') : 'class="fa fa-square-o"' !!}></i>Course</a></li> -->
                     <li {!! isset($pageDetails)?($pageDetails->title == 'staff'? 'class="active"' : '') : '' !!}><a href="{{ route('college::getStaff') }}"><i {!! isset($pageDetails)?($pageDetails->title == 'staff'? 'class="fa fa-check-square-o"' : 'class="fa fa-square-o"') : 'class="fa fa-square-o"' !!}></i>Staff</a></li>
-                    <li {!! isset($pageDetails)?($pageDetails->title == 'student'? 'class="active"' : '') : '' !!}><a href="{{ route('college::getStudent') }}"><i {!! isset($pageDetails)?($pageDetails->title == 'student'? 'class="fa fa-check-square-o"' : 'class="fa fa-square-o"') : 'class="fa fa-square-o"' !!}></i>Student</a></li>
+                  <!--  <li {!! isset($pageDetails)?($pageDetails->title == 'student'? 'class="active"' : '') : '' !!}><a href="{{ route('college::getStudent') }}"><i {!! isset($pageDetails)?($pageDetails->title == 'student'? 'class="fa fa-check-square-o"' : 'class="fa fa-square-o"') : 'class="fa fa-square-o"' !!}></i>Student</a></li> -->
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

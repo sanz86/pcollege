@@ -31,7 +31,7 @@
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img id="userImage" src="/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                <img id="userImage" src="{{ route('avatar',['image' => Auth::user()->avatar]) }}" class="img-circle" alt="User Image" />
                                 <p>
                                     {{ Auth::user()->name }}
                                     <small>{{ Auth::user()->email }}</small>
