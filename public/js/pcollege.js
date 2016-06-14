@@ -1,7 +1,7 @@
 (function($) {
 	
 	// Image Uploader in content File
-	
+
 		// Initiate the Modals
 			function initContentModal()
 		    {
